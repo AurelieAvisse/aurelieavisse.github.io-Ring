@@ -1,0 +1,134 @@
+$primary_color: rgb(255, 96, 38);
+$secondary_color: #FFFFFF;
+@mixin no_style {
+    list-style: none;
+}
+
+@mixin link {
+    text-decoration: none;
+}
+
+@mixin circle($radius, $color) {
+    width: $radius;
+    height: $radius;
+    border-radius: $radius;
+    border: solid $radius/12 $color;
+    box-shadow: inset $radius/30 $radius/30 $radius/25 0px darken($color, 15%), $radius/30 $radius/30 $radius/25 darken($color, 20%);
+}
+
+@mixin circle_loop($radius, $color) {
+    @for $i from 1 through 6 {
+        $border: $radius * $i;
+        $radius_loop: $radius * $i;
+        .circle_3:nth-child(#{$i}) {
+            width: $radius_loop;
+            height: $radius_loop;
+            border-radius: $radius_loop;
+            border: solid $border/12 $color;
+            box-shadow: inset $radius_loop/30 $radius_loop/30 $radius_loop/25 0px darken($color, 15%), $radius_loop/30 $radius_loop/30 $radius_loop/25 darken($color, 20%);
+            margin-left: -6px * $i;
+        }
+    }
+}
+
+@mixin font($font-family, $font-file) {
+    @font-face {
+        font-family: $font-family;
+        src: url($font-file+'.ttf') format('truetype')
+    }
+}
+
+@include font('Aniron', 'font/Aniron-7BaP');
+body {
+    background-image: url("images/bg_light.png");
+    font-family: Aniron;
+}
+
+nav {
+    background-color: $primary_color;
+}
+
+.logo {
+    margin-top: 1vmin;
+    height: 6vmin;
+    margin-right: 6vmin;
+}
+
+.nav-link {
+    color: $secondary_color;
+    font-size: 1.2em;
+    font-family: Aniron;
+    &:hover {
+        color: $secondary_color;
+        font-weight: bold;
+    }
+}
+
+.vertical {
+    margin-left: 1vmin;
+    width: 1vmin;
+    border-left: 0.3vmin solid white;
+    height: 4vmin;
+}
+
+.section {
+    margin-top: 10vmin;
+    margin-bottom: 10vmin;
+}
+
+.section_circle {
+    margin-top: 8vmin;
+}
+
+h2 {
+    margin: 6vmin;
+    font-family: Aniron;
+}
+
+.circle_1 {
+    @include circle(50px,
+    $primary_color);
+}
+
+.circle_2 {
+    @include circle(170px,
+    #FFD70D);
+}
+
+.loop {
+    @include circle_loop(20px,
+    #545454);
+    margin-bottom: 2vmin;
+}
+
+.page-footer {
+    background-color: $primary_color;
+    color: $secondary_color;
+    padding: 0.9vmin;
+    font-size: 1em;
+    font-family: Aniron;
+}
+
+.li {
+    @include no_style;
+    margin-top: 1.5vmin;
+    >.link {
+        @include link;
+        color: $secondary_color;
+        &:hover {
+            color: white;
+        }
+    }
+    >.link_end {
+        @include link;
+        color: $secondary_color;
+        &:hover {
+            color: $secondary_color;
+        }
+    }
+}
+
+.logo_footer {
+    height: 1.5em;
+    margin-top: 1.5vmin;
+}
